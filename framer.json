@@ -1,0 +1,8 @@
+{
+  "id": "5fb4d1",
+  "name": "Simple Icons Framer Plugin",
+  "modes": [
+    "canvas"
+  ],
+  "icon": "/icon.svg"
+}
