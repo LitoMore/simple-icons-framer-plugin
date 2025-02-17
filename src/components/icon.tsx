@@ -12,10 +12,12 @@ function Icon({
 	readonly version: string;
 }) {
 	const isWhite = icon.hex === 'FFFFFF';
+	const isBright = luminance >= 0.4;
+	const isDark = luminance <= 0.05;
 
 	return (
 		<div
-			className="icon"
+			className={`icon ${isBright ? 'bright' : isDark ? 'dark' : ''}`}
 			style={{
 				border: `${isWhite ? 1 : 2}px solid ${
 					isWhite
@@ -26,8 +28,9 @@ function Icon({
 			}}
 			onClick={async () => {
 				const svg = await loadSvg(version, icon.slug);
+				const coloredSvg = svg.replace('<svg ', `<svg fill="#${icon.hex}" `);
 				await framer.addSVG({
-					svg,
+					svg: coloredSvg,
 					name: `${icon.slug}.svg`,
 				});
 			}}
@@ -44,7 +47,7 @@ function Icon({
 			/>
 			<div className="icon-title">{icon.title}</div>
 			<div
-				className={`icon-color ${luminance < 0.4 ? 'light' : ''}`}
+				className={`icon-color ${isBright ? '' : 'light'}`}
 				style={{
 					backgroundColor: `#${icon.hex}`,
 				}}

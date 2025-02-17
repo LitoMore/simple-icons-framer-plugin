@@ -119,9 +119,21 @@
         border-width: 1px !important;
       }
 
-      [data-framer-theme="dark"] .icon-image {
-        background-color: var(--color-text) !important;
+      .icon.bright {
+        filter: contrast(0.65);
       }
+
+      [data-framer-theme="dark"] .icon.bright {
+        filter: unset;
+      }
+
+      [data-framer-theme="dark"] .icon.dark {
+        filter: contrast(0.65) brightness(1.5);
+      }
+
+      /* [data-framer-theme="dark"] .icon-image {
+        background-color: var(--color-text) !important;
+      } */
 
       [data-framer-theme="dark"] .icon-color {
         border-top: 1px dashed var(--color-text) !important;
