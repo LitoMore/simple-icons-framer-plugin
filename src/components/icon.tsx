@@ -1,5 +1,5 @@
-import {framer} from 'framer-plugin';
-import {IconData} from '../types.js';
+import {framer, useIsAllowedTo} from 'framer-plugin';
+import {type IconData} from '../types.js';
 import {loadSvg} from '../utils.js';
 
 function Icon({
@@ -11,6 +11,7 @@ function Icon({
 	readonly luminance: number;
 	readonly version: string;
 }) {
+	const isAllowedToAddSvg = useIsAllowedTo('addSVG');
 	const isWhite = icon.hex === 'FFFFFF';
 	const isBright = luminance >= 0.4;
 	const isDark = luminance <= 0.05;
@@ -27,6 +28,10 @@ function Icon({
 				borderBottomWidth: isWhite ? 1 : 0,
 			}}
 			onClick={async () => {
+				if (!isAllowedToAddSvg) {
+					framer.notify('Permission to add SVGs is required.');
+				}
+
 				const svg = await loadSvg(version, icon.slug);
 				const coloredSvg = svg.replace('<svg ', `<svg fill="#${icon.hex}" `);
 				await framer.addSVG({

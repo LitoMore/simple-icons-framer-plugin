@@ -3,7 +3,7 @@ import {Searcher} from 'fast-fuzzy';
 import getRelativeLuminance from 'get-relative-luminance';
 import {VirtuosoGrid} from 'react-virtuoso';
 import {styled} from 'styled-components';
-import {IconData} from '../types.js';
+import {type IconData} from '../types.js';
 import Icon from './icon.js';
 
 const ListContainer = styled.div`

@@ -1,10 +1,10 @@
 import {useEffect, useState} from 'react';
 import {framer} from 'framer-plugin';
-import Icons from './components/icons';
-import Loading from './components/loading';
-import Search from './components/search';
-import {IconData} from './types';
-import {loadJson, loadLatestVersion, titleToSlug} from './utils';
+import Icons from './components/icons.js';
+import Loading from './components/loading.js';
+import Search from './components/search.js';
+import {type IconData} from './types.js';
+import {loadJson, loadLatestVersion} from './utils.js';
 import './app.css';
 
 void framer.showUI({
@@ -21,11 +21,7 @@ export function App() {
 	useEffect(() => {
 		(async () => {
 			const version = await loadLatestVersion();
-			const json = await loadJson(version);
-			const icons = json.map((icon) => ({
-				...icon,
-				slug: icon.slug || titleToSlug(icon.title),
-			}));
+			const icons = await loadJson(version);
 			setIcons(icons);
 			setVersion(version);
 		})();

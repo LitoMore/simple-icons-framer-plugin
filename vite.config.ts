@@ -1,3 +1,4 @@
+/* eslint @typescript-eslint/no-unsafe-call: off */
 import react from '@vitejs/plugin-react-swc';
 import {defineConfig} from 'vite';
 import framer from 'vite-plugin-framer';
